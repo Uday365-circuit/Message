@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Something Important ❤️</title>
+
+<style>
+body{
+    text-align:center;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(to right,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+#container{
+    margin-top:150px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:20px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#yes{
+    background:lightgreen;
+}
+
+#no{
+    background:tomato;
+    position:fixed;
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+    <h1>I have to tell you something...</h1>
+    <button onclick="start()">Continue</button>
+</div>
+
+<script>
+let noCount = 0;
+
+function start() {
+    document.getElementById("container").innerHTML = `
+        <h1>❤️ I LOVE YOU ❤️</h1>
+        <h2>🥰🌹💖</h2>
+        <p>Do you like me?</p>
+
+        <button id="yes" onclick="yesClicked()">Yes</button>
+        <button id="no" onclick="noClicked()">No</button>
+    `;
+
+    moveNoButton();
+}
+
+function noClicked() {
+    noCount++;
+
+    let noBtn = document.getElementById("no");
+
+    if (noCount == 1) {
+        noBtn.innerText = "Really? 😢";
+    }
+    else if (noCount == 2) {
+        noBtn.innerText = "Are you sure? 🥺";
+    }
+    else if (noCount == 3) {
+        noBtn.innerText = "Please... ❤️";
+    }
+    else {
+        noBtn.innerText = "Catch me if you can! 😂";
+
+        noBtn.addEventListener("mouseover", moveNoButton);
+
+        noBtn.addEventListener("touchstart", function(e) {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        moveNoButton();
+    }
+}
+
+function moveNoButton() {
+    let noBtn = document.getElementById("no");
+
+    let maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    let maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+function yesClicked() {
+    document.getElementById("container").innerHTML = `
+        <h1>🥳 You made my day! ❤️</h1>
+        <h2>🌹✨😊</h2>
+        <p>I promise to always make you smile! 💖</p>
+    `;
+}
+</script>
+
+</body>
+</html>
